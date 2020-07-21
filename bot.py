@@ -50,7 +50,7 @@ def respond(bot, update):
     else:
         reply = "Sorry! I don't understand this command yet :("
 
-    bot.send_message(chat_id=chat_id, text=reply)
+    bot.send_message(chat_id=chat_id, text="sample reply")
 
 respond_handler = MessageHandler(Filters.text, respond)
 dp.add_handler(respond_handler)
