@@ -1,5 +1,4 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from scraper import scraping
 import logging
 import os
 import json
