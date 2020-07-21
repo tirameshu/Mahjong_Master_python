@@ -42,6 +42,9 @@ def win(bot, update):
     reply_markup = InlineKeyboardMarkup(keyboard)
     bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
 
+win_handler = CommandHandler('win', win)
+dp.add_handler(win_handler)
+
 def ping_hu_reply(bot, chat_id):
     bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/pinghu.png")
     reply = "Above is an example of the Ping Hu (平胡) hand.\n \
