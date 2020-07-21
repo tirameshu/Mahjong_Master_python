@@ -32,24 +32,28 @@ def rules(bot, update):
 rules_handler = CommandHandler('rules', rules)
 dp.add_handler(rules_handler)
 
+def win(bot, update):
+    reply = "Here are 4 main ways to win in Mahjong, which would you like to know about?"
+
+    keyboard = [
+        [ InlineKeyboardButton("Ping Hu"), InlineKeyboardButton("Peng Peng Hu") ],
+        [ InlineKeyboardButton("Qing Yi Se"), InlineKeyboardButton("Hun Yi Se") ]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
+
 def ping_hu_reply(bot, chat_id):
-    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/MahjongMaster/master/photos/tiles.jpg")
+    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/pinghu.png")
     reply = "Above is an example of the Ping Hu (平胡) hand.\n \
-     Requirements:\n \
-        1) No honour tiles that can give multipliers\n \
-        2) No triplets (all sets must be sequential)\n \
-        3) Waiting hand must be able to win with **at least** 2 different tiles"
+    Requirements:\n \
+    1) No honour tiles that can give multipliers\n \
+    2) No triplets (all sets must be sequential)\n \
+    3) Waiting hand must be able to win with **at least** 2 different tiles"
     return reply
 
 def tiles(bot, update):
     reply = "Here is a list of all the tiles in Mahjong! Choose what *suit(e)s* your interest!"
-
-    keyboard = [
-        [ InlineKeyboardButton("Ping Hu"), InlineKeyboardButton("Peng Peng Hu") ],
-        [ InlineKeyboardButton("Qing Yi Se"), InlineKeyboardButton("Hun Yi Se")]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
+    bot.send_message(chat_id=update.message.chat_id, text=reply)
     bot.send_photo(chat_id=update.message.chat_id, photo="https://raw.githubusercontent.com/tirameshu/MahjongMaster/master/photos/tiles.jpg")
 
 tiles_handler = CommandHandler('tiles', tiles)
