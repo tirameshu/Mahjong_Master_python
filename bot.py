@@ -1,4 +1,5 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 import logging
 import os
 import json
@@ -31,9 +32,24 @@ def rules(bot, update):
 rules_handler = CommandHandler('rules', rules)
 dp.add_handler(rules_handler)
 
+def ping_hu_reply(bot, chat_id):
+    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/MahjongMaster/master/photos/tiles.jpg")
+    reply = "Above is an example of the Ping Hu (平胡) hand.\n \
+     Requirements:\n \
+        1) No honour tiles that can give multipliers\n \
+        2) No triplets (all sets must be sequential)\n \
+        3) Waiting hand must be able to win with **at least** 2 different tiles"
+    return reply
+
 def tiles(bot, update):
     reply = "Here is a list of all the tiles in Mahjong! Choose what *suit(e)s* your interest!"
-    bot.send_message(chat_id=update.message.chat_id, text=reply)
+
+    keyboard = [
+        [ InlineKeyboardButton("Ping Hu"), InlineKeyboardButton("Peng Peng Hu") ],
+        [ InlineKeyboardButton("Qing Yi Se"), InlineKeyboardButton("Hun Yi Se")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
     bot.send_photo(chat_id=update.message.chat_id, photo="https://raw.githubusercontent.com/tirameshu/MahjongMaster/master/photos/tiles.jpg")
 
 tiles_handler = CommandHandler('tiles', tiles)
@@ -44,20 +60,16 @@ def respond(bot, update):
     text = update.message.text
     chat_id = update.message.chat_id
 
-    reply = "Sorry! I can't really converse yet :("
+    if text.lower() == "ping hu":
+        reply = ping_hu_reply(bot, chat_id)
+    else:
+        reply = "Sorry! I can't really converse yet :("
 
     bot.send_message(chat_id=chat_id, text=reply)
 
 respond_handler = MessageHandler(Filters.text, respond)
 dp.add_handler(respond_handler)
-#     if "hate mahjong" in text:
-#         reply = "Get out >:("
-#     elif text == '/tiles':
-#         reply = "Here is a list of all the tiles in Mahjong! Choose what *suit(e)s* your interest!"
-#     #     status = requests.post("https://api.telegram.org/bot<" + TOKEN + ">/sendPhoto?chat_id=" + data['chat_id'], files=files)
-#     # options = Telegram::Bot::Types::ReplyKeyboardMarkup
-#     # .new(keyboard: [%w(Tong(dots) Tiao/Suo(bamboos)), %w(Wan(characters) DaPai(honours))], one_time_keyboard: true)
-#     bot.api.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=options)
+
 # when 'Tong', 'Dots'
 #     reply = "Here is a list of dotted tiles 筒子 in ascending order!"
 #     #bot.api.send_photo(chat_id: message.chat.id, photo:
