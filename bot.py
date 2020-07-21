@@ -21,7 +21,7 @@ dp.add_handler(start_handler)
 # Other commands
 
 def rules(bot, update):
-    reply = "In Mahjong, there are many ways to win. Some of the basic ones are: \
+    reply = "In Mahjong, there are many ways to win. Some of the basic ones are: \n \
                1) Ping Hu\n \
                2) Peng Peng Hu\n \
                3) Qing Yi Se\n \
@@ -34,8 +34,7 @@ dp.add_handler(rules_handler)
 def tiles(bot, update):
     reply = "Here is a list of all the tiles in Mahjong! Choose what *suit(e)s* your interest!"
     bot.send_message(chat_id=update.message.chat_id, text=reply)
-    bot.send_photo(chat_id=update.message.chat_id, photo="https://github.com/tirameshu/MahjongMaster/blob/master/photos/tiles.jpg",
-                   caption="all tiles")
+    bot.send_photo(chat_id=update.message.chat_id, photo="https://raw.githubusercontent.com/tirameshu/MahjongMaster/master/photos/tiles.jpg")
 
 tiles_handler = CommandHandler('tiles', tiles)
 dp.add_handler(tiles_handler)
