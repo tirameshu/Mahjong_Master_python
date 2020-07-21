@@ -19,8 +19,23 @@ start_handler = CommandHandler('start', start)
 dp.add_handler(start_handler)
 
 # Other functions
+
+def send_local_picture(chat_id, photo_path):
+    data = {'chat_id', chat_id}
+    files = {'photo': open(photo_path, 'rb')}
+    status = requests.post("https://api.telegram.org/bot" + TOKEN +"/sendPhoto", data=data, files=files)
+    return status
+
+# def send_online_picture(chat_id, url):
+#     remote_image = requests.get(url)
+#     data = {'chat_id', chat_id}
+#     files = {'photo': open(photo_path, 'rb')}
+#     status = requests.post("https://api.telegram.org/bot" + TOKEN +"/sendPhoto", data=data, files=files)
+#     return status
+
 def respond(bot, update):
     text = update.message.text
+    chat_id = update.message.chat_id
 
     if text == '/rules':
         reply = "In Mahjong, there are many ways to win. Some of the basic ones are: \
@@ -28,8 +43,14 @@ def respond(bot, update):
            2) Peng Peng Hu\n \
            3) Qing Yi Se\n \
            4) Hun Yi Se \nWhich one do you want to know about?"
+    elif text == '/tiles':
+        reply = "Here is a list of all the tiles in Mahjong! Choose what *suit(e)s* your interest!"
+        # send_online_picture(chat_id, "https://github.com/tirameshu/MahjongMaster/blob/master/photos/tiles.jpg")
+        bot.send_photo(chat_id, "https://github.com/tirameshu/MahjongMaster/blob/master/photos/tiles.jpg", caption="all tiles")
+    else:
+        reply = "Sorry! I don't understand this command yet :("
 
-    bot.send_message(chat_id=update.message.chat_id, text=msg)
+    bot.send_message(chat_id=chat_id, text=reply)
 
 respond_handler = MessageHandler(Filters.text, respond)
 dp.add_handler(respond_handler)
