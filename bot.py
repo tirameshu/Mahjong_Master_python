@@ -35,16 +35,24 @@ dp.add_handler(rules_handler)
 def win(bot, update):
     reply = "Here are 4 main ways to win in Mahjong, which would you like to know about?"
 
-    keyboard = [
-        [ InlineKeyboardButton("Ping Hu"), InlineKeyboardButton("Peng Peng Hu") ],
-        [ InlineKeyboardButton("Qing Yi Se"), InlineKeyboardButton("Hun Yi Se") ]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
+    bot.send_message(chat_id=update.message.chat_id, text=reply)
+
+    # keyboard = [
+    #     [ InlineKeyboardButton("Ping Hu"), InlineKeyboardButton("Peng Peng Hu") ],
+    #     [ InlineKeyboardButton("Qing Yi Se"), InlineKeyboardButton("Hun Yi Se") ]
+    # ]
+    # reply_markup = InlineKeyboardMarkup(keyboard)
+    # bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
 
 win_handler = CommandHandler('win', win)
 dp.add_handler(win_handler)
 
+def tiles(bot, update):
+    reply = "Here is a list of all the tiles in Mahjong! Choose what *suit(e)s* your interest!"
+    bot.send_message(chat_id=update.message.chat_id, text=reply)
+    bot.send_photo(chat_id=update.message.chat_id, photo="https://raw.githubusercontent.com/tirameshu/MahjongMaster/master/photos/tiles.jpg")
+
+# normal functions
 def ping_hu_reply(bot, chat_id):
     bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/pinghu.png")
     reply = "Above is an example of the Ping Hu (平胡) hand.\n \
@@ -53,12 +61,19 @@ def ping_hu_reply(bot, chat_id):
     2) No triplets (all sets must be sequential)\n \
     3) Waiting hand must be able to win with **at least** 2 different tiles\n \
     The hand below is not Ping Hu:"
+    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/not%20pinghu.png")
     return reply
 
-def tiles(bot, update):
-    reply = "Here is a list of all the tiles in Mahjong! Choose what *suit(e)s* your interest!"
-    bot.send_message(chat_id=update.message.chat_id, text=reply)
-    bot.send_photo(chat_id=update.message.chat_id, photo="https://raw.githubusercontent.com/tirameshu/MahjongMaster/master/photos/tiles.jpg")
+def pengpenghu_reply(bot, chat_id):
+    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/pinghu.png")
+    reply = "Above is an example of the Ping Hu (平胡) hand.\n \
+    Requirements:\n \
+    1) No honour tiles that can give multipliers\n \
+    2) No triplets (all sets must be sequential)\n \
+    3) Waiting hand must be able to win with **at least** 2 different tiles\n \
+    The hand below is not Ping Hu:"
+    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/not%20pinghu.png")
+    return reply
 
 tiles_handler = CommandHandler('tiles', tiles)
 dp.add_handler(tiles_handler)
