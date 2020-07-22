@@ -51,7 +51,8 @@ def ping_hu_reply(bot, chat_id):
     Requirements:\n \
     1) No honour tiles that can give multipliers\n \
     2) No triplets (all sets must be sequential)\n \
-    3) Waiting hand must be able to win with **at least** 2 different tiles"
+    3) Waiting hand must be able to win with **at least** 2 different tiles\n \
+    The hand below is not Ping Hu:"
     return reply
 
 def tiles(bot, update):
