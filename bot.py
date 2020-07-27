@@ -41,10 +41,7 @@ def win(bot, update):
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard, one_time_keyboard=True)
     bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
-    bot.edit_message_reply_markup(inline_message_id=update.callback_query.inline_message_id)
-
-    # query = update.callback_query.data
-    # bot.send_message(chat_id=update.message.chat_id, text=query)
+    bot.send_message(chat_id=update.message.chat_id, text="", reply_markup=ReplyKeyboardRemove())
 
 win_handler = CommandHandler('win', win)
 dp.add_handler(win_handler)
