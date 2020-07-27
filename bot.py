@@ -1,5 +1,5 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import ReplyKeyboardMarkup
 import logging
 import os
 import json
@@ -36,10 +36,10 @@ def win(bot, update):
     reply = "Here are 4 main ways to win in Mahjong, which would you like to know about?"
 
     keyboard = [
-        [ InlineKeyboardButton("Ping Hu", callback_data="Ping Hu"), InlineKeyboardButton("Peng Peng Hu", callback_data="Peng Peng Hu") ],
-        [ InlineKeyboardButton("Qing Yi Se", callback_data="Qing Yi Se"), InlineKeyboardButton("Hun Yi Se", callback_data="Peng Peng Hu") ]
+        [ "Ping Hu", "Peng Peng Hu"],
+        [ "Qing Yi Se", "Hun Yi Se"]
     ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
+    reply_markup = ReplyKeyboardMarkup(keyboard)
     bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
 
     query = update.callback_query.data
