@@ -39,9 +39,9 @@ def win(bot, update):
         [ "Ping Hu", "Peng Peng Hu"],
         [ "Qing Yi Se", "Hun Yi Se"]
     ]
-    reply_markup = ReplyKeyboardMarkup(keyboard)
+    reply_markup = ReplyKeyboardMarkup(keyboard, one_time_keyboard=True)
     bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
-    bot.send_message(chat_id=update.message.chat_id, text="", reply_markup=ReplyKeyboardRemove(remove_keyboard=True, selective=False))
+    # bot.send_message(chat_id=update.message.chat_id, text="", reply_markup=ReplyKeyboardRemove(remove_keyboard=True, selective=False))
 
 win_handler = CommandHandler('win', win)
 dp.add_handler(win_handler)
