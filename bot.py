@@ -63,7 +63,6 @@ def ping_hu_reply(bot, chat_id):
     2) No triplets (all sets must be sequential)\n \
     3) Waiting hand must be able to win with **at least** 2 different tiles\n \
     The hand below is not Ping Hu:"
-    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/not%20pinghu.png")
     return reply
 
 def pengpenghu_reply(bot, chat_id):
@@ -87,10 +86,12 @@ def respond(bot, update):
 
     if text.lower() == "ping hu":
         reply = ping_hu_reply(bot, chat_id)
+        bot.send_message(chat_id=chat_id, text=reply)
+        bot.send_photo(chat_id=chat_id,
+                       photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/not%20pinghu.png")
     else:
         reply = "Sorry! I can't really converse yet :("
-
-    bot.send_message(chat_id=chat_id, text=reply)
+        bot.send_message(chat_id=chat_id, text=reply)
 
 respond_handler = MessageHandler(Filters.text, respond)
 dp.add_handler(respond_handler)
