@@ -41,9 +41,10 @@ def win(bot, update):
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard, one_time_keyboard=True)
     bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
+    bot.edit_message_reply_markup(inline_message_id=update.callback_query.inline_message_id)
 
-    query = update.callback_query.data
-    bot.send_message(chat_id=update.message.chat_id, text=query)
+    # query = update.callback_query.data
+    # bot.send_message(chat_id=update.message.chat_id, text=query)
 
 win_handler = CommandHandler('win', win)
 dp.add_handler(win_handler)
@@ -108,6 +109,10 @@ def respond(bot, update):
 
     elif text.lower() == "qing yi se":
         reply = qingyise_reply(bot, chat_id)
+        bot.send_message(chat_id=chat_id, text=reply)
+
+    elif text.lower() == "hun yi se":
+        reply = hunyise_reply(bot, chat_id)
         bot.send_message(chat_id=chat_id, text=reply)
 
     else:
