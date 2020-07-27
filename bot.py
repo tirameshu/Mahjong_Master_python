@@ -42,6 +42,9 @@ def win(bot, update):
     reply_markup = InlineKeyboardMarkup(keyboard)
     bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
 
+    query = update.callback_query.data
+    bot.send_message(chat_id=update.message.chat_id, text=query)
+
 win_handler = CommandHandler('win', win)
 dp.add_handler(win_handler)
 
@@ -50,12 +53,6 @@ def tiles(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text=reply)
     bot.send_photo(chat_id=update.message.chat_id, photo="https://raw.githubusercontent.com/tirameshu/MahjongMaster/master/photos/tiles.jpg")
 
-def button(bot, update):
-    query = update.callback_query.data
-    bot.send_message(chat_id=update.message.chat_id, text=query)
-
-button_handler = CallbackQueryHandler(button)
-dp.add_handler(button_handler)
 
 # normal functions
 def ping_hu_reply(bot, chat_id):
