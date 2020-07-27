@@ -1,4 +1,4 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 import logging
 import os
@@ -35,8 +35,6 @@ dp.add_handler(rules_handler)
 def win(bot, update):
     reply = "Here are 4 main ways to win in Mahjong, which would you like to know about?"
 
-    bot.send_message(chat_id=update.message.chat_id, text=reply)
-
     keyboard = [
         [ InlineKeyboardButton("Ping Hu", callback_data="Ping Hu"), InlineKeyboardButton("Peng Peng Hu", callback_data="Peng Peng Hu") ],
         [ InlineKeyboardButton("Qing Yi Se", callback_data="Qing Yi Se"), InlineKeyboardButton("Hun Yi Se", callback_data="Peng Peng Hu") ]
@@ -52,6 +50,13 @@ def tiles(bot, update):
     reply = "Here is a list of all the tiles in Mahjong! Choose what *suit(e)s* your interest!"
     bot.send_message(chat_id=update.message.chat_id, text=reply)
     bot.send_photo(chat_id=update.message.chat_id, photo="https://raw.githubusercontent.com/tirameshu/MahjongMaster/master/photos/tiles.jpg")
+
+def button(bot, update):
+    query = update.callback_query.data
+    bot.send_message(chat_id=update.message.chat_id, text=query)
+
+button_handler = CallbackQueryHandler(button)
+dp.add_handler(button_handler)
 
 # normal functions
 def ping_hu_reply(bot, chat_id):
