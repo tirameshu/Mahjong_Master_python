@@ -55,25 +55,22 @@ def tiles(bot, update):
 
 
 # normal functions
-def ping_hu_reply(bot, chat_id):
+def pinghu_reply(bot, chat_id):
     bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/pinghu.png")
     reply = "Above is an example of the Ping Hu (平胡) hand.\n \
     Requirements:\n \
     1) No honour tiles that can give multipliers\n \
-    2) No triplets (all sets must be sequential)\n \
+    2) No 3 of a kind (all sets must be sequential)\n \
     3) Waiting hand must be able to win with **at least** 2 different tiles\n \
     The hand below is not Ping Hu:"
     return reply
 
 def pengpenghu_reply(bot, chat_id):
-    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/pinghu.png")
-    reply = "Above is an example of the Ping Hu (平胡) hand.\n \
-    Requirements:\n \
-    1) No honour tiles that can give multipliers\n \
-    2) No triplets (all sets must be sequential)\n \
-    3) Waiting hand must be able to win with **at least** 2 different tiles\n \
-    The hand below is not Ping Hu:"
-    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/not%20pinghu.png")
+    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/pengpenghu.png")
+    reply = "Above is an example of the Peng Peng Hu (碰碰胡) hand.\n \
+    Requirement:\n \
+    1) All sets must be 3 of a kind.\n \
+    The two sets on the side in the example are gang (杠, 4 of a kind) and peng (碰, 3 of a kind, one of which is the discard of another player)."
     return reply
 
 tiles_handler = CommandHandler('tiles', tiles)
@@ -85,10 +82,15 @@ def respond(bot, update):
     chat_id = update.message.chat_id
 
     if text.lower() == "ping hu":
-        reply = ping_hu_reply(bot, chat_id)
+        reply = pinghu_reply(bot, chat_id)
         bot.send_message(chat_id=chat_id, text=reply)
         bot.send_photo(chat_id=chat_id,
                        photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/not%20pinghu.png")
+
+    elif text.lower() == "peng peng hu":
+        reply = pengpenghu_reply(bot, chat_id)
+        bot.send_message(chat_id=chat_id, text=reply)
+
     else:
         reply = "Sorry! I can't really converse yet :("
         bot.send_message(chat_id=chat_id, text=reply)
@@ -115,24 +117,6 @@ dp.add_handler(respond_handler)
 #     reply = "Here is a list of honour tiles 大牌 in no particular order!"
 #     #bot.api.send_photo(chat_id: message.chat.id, photo:
 #      #   Faraday::UploadIO.new('/Users/mandy/Repos/MahjongMaster/photos/honours.jpg', 'image/jpeg'))
-#     bot.api.send_message(chat_id: person_id, text: reply)
-# when '/play'
-#     reply = "Sorry I don't know how to play yet :/"
-#     bot.api.send_message(chat_id: person_id, text: reply)
-# when '/rules'
-#     reply =
-#     """
-#     In Mahjong, there are many ways to win. Some of the basic ones are:
-#     1) Ping Hu
-#     2) Peng Peng Hu
-#     3) Qing Yi Se
-#     4) Hun Yi Se \nWhich one do you want to know about?
-#     """
-#     options = Telegram::Bot::Types::ReplyKeyboardMarkup
-#     .new(keyboard: [%w(1 2), %w(3 4)], one_time_keyboard: true)
-#     bot.api.send_message(chat_id: person_id, text: reply, reply_markup: options)
-# else
-#     reply = "I have no idea what #{command} means :("
 #     bot.api.send_message(chat_id: person_id, text: reply)
 
 # start webhooks
