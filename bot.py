@@ -38,11 +38,12 @@ def win(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text=reply)
 
     keyboard = [
-        [ InlineKeyboardButton("Ping Hu", callback_data='1'), InlineKeyboardButton("Peng Peng Hu", callback_data='2') ],
-        [ InlineKeyboardButton("Qing Yi Se", callback_data='3'), InlineKeyboardButton("Hun Yi Se", callback_data='4') ]
+        [ InlineKeyboardButton("Ping Hu", callback_data="Ping Hu"), InlineKeyboardButton("Peng Peng Hu", callback_data="Peng Peng Hu") ],
+        [ InlineKeyboardButton("Qing Yi Se", callback_data="Qing Yi Se"), InlineKeyboardButton("Hun Yi Se", callback_data="Peng Peng Hu") ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
+    bot.send_message(chat_id=update.message.chat_id, text=update.callback_query.data, reply_markup=reply_markup)
 
 win_handler = CommandHandler('win', win)
 dp.add_handler(win_handler)
