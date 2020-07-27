@@ -39,7 +39,7 @@ def win(bot, update):
         [ "Ping Hu", "Peng Peng Hu"],
         [ "Qing Yi Se", "Hun Yi Se"]
     ]
-    reply_markup = ReplyKeyboardMarkup(keyboard, one_time_keyboard=True)
+    reply_markup = ReplyKeyboardMarkup(keyboard)
     bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=reply_markup)
     bot.send_message(chat_id=update.message.chat_id, text="", reply_markup=ReplyKeyboardRemove())
 
