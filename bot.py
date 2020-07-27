@@ -53,15 +53,18 @@ def tiles(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text=reply)
     bot.send_photo(chat_id=update.message.chat_id, photo="https://raw.githubusercontent.com/tirameshu/MahjongMaster/master/photos/tiles.jpg")
 
+tiles_handler = CommandHandler('tiles', tiles)
+dp.add_handler(tiles_handler)
+
 
 # normal functions
 def pinghu_reply(bot, chat_id):
     bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/pinghu.png")
     reply = "Above is an example of the Ping Hu (平胡) hand.\n \
     Requirements:\n \
-    1) No honour tiles that can give multipliers\n \
-    2) No 3 of a kind (all sets must be sequential)\n \
-    3) Waiting hand must be able to win with **at least** 2 different tiles\n \
+    1) All *sets* must be sequential. No 3 of a kind.\n \
+    2) No honour tiles that can give multipliers, including winds.\n \
+    3) Waiting hand must be able to win with **at least** 2 different tiles.\n \
     The hand below is not Ping Hu:"
     return reply
 
@@ -69,12 +72,16 @@ def pengpenghu_reply(bot, chat_id):
     bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/pengpenghu.png")
     reply = "Above is an example of the Peng Peng Hu (碰碰胡) hand.\n \
     Requirement:\n \
-    1) All sets must be 3 of a kind.\n \
+    1) All *sets* must strictly be 3 of a kind.\n \
     The two sets on the side in the example are gang (杠, 4 of a kind) and peng (碰, 3 of a kind, one of which is the discard of another player)."
     return reply
 
-tiles_handler = CommandHandler('tiles', tiles)
-dp.add_handler(tiles_handler)
+def qingyise_reply(bot, chat_id):
+    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/qingyise.png")
+    reply = "Above is an exaple of the Qing Yi Se (清一色) hand\n \
+    Requirement:\n \
+    1) All *tiles* must be of the same suite. The sets can be a mix of sequential of 3 of a kind."
+    return reply
 
 # General text responses
 def respond(bot, update):
@@ -89,6 +96,10 @@ def respond(bot, update):
 
     elif text.lower() == "peng peng hu":
         reply = pengpenghu_reply(bot, chat_id)
+        bot.send_message(chat_id=chat_id, text=reply)
+
+    elif text.lower() == "qing yi se":
+        reply = qingyise_reply(bot, chat_id)
         bot.send_message(chat_id=chat_id, text=reply)
 
     else:
