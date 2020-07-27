@@ -1,5 +1,5 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
-from telegram import ReplyKeyboardMarkup
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 import logging
 import os
 import json
@@ -44,6 +44,8 @@ def win(bot, update):
 
     query = update.callback_query.data
     bot.send_message(chat_id=update.message.chat_id, text=query)
+
+    bot.send_message(chat_id=update.message.chat_id, text=reply, reply_markup=ReplyKeyboardRemove())
 
 win_handler = CommandHandler('win', win)
 dp.add_handler(win_handler)
