@@ -72,15 +72,23 @@ def pengpenghu_reply(bot, chat_id):
     bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/pengpenghu.png")
     reply = "Above is an example of the Peng Peng Hu (碰碰胡) hand.\n \
     Requirement:\n \
-    1) All *sets* must strictly be 3 of a kind.\n \
+    1) All *sets* must strictly be 3 (or 4) of a kind.\n \
     The two sets on the side in the example are gang (杠, 4 of a kind) and peng (碰, 3 of a kind, one of which is the discard of another player)."
     return reply
 
 def qingyise_reply(bot, chat_id):
     bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/qingyise.png")
-    reply = "Above is an exaple of the Qing Yi Se (清一色) hand\n \
+    reply = "Above is an example of the Qing Yi Se (清一色) hand\n \
     Requirement:\n \
-    1) All *tiles* must be of the same suite. The sets can be a mix of sequential of 3 of a kind."
+    1) All *tiles* must be of the same suite. The sets can be a mix of sequential and 3 (or 4) of a kind."
+    return reply
+
+def hunyise_reply(bot, chat_id):
+    bot.send_photo(chat_id=chat_id, photo="https://raw.githubusercontent.com/tirameshu/Mahjong_Master_python/master/photos/hunyise.png")
+    reply = "Above is an example of the Hun Yi Se (混一色) hand\n \
+    Requirement:\n \
+    1) *Tiles* must be of the same suite + honour tiles. The sets can be a mix of sequential and 3 (or 4) of a kind. \n \
+    The honour tiles can be either for the eyes (pair) or a set."
     return reply
 
 # General text responses
